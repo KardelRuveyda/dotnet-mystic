@@ -8,8 +8,8 @@ Bu proje, Blazor kullanarak bir kullanıcı arayüzü ve ASP.NET Core kullanarak
 **Teknoloji:** Blazor WebAssembly veya Blazor Server  
 **Amaç:** Kullanıcıların rüyalarını yazabilecekleri bir arayüz ve tabir sonuçlarını görebilecekleri bir ekran oluşturmak.  
 **Adımlar:**  
-- Rüyanın yazılacağı bir metin kutusu ve "Tabir Et" butonu oluştur.
-- Tabir sonuçlarını göstermek için bir alan hazırla.
+- Rüyanın yazılacağı bir metin kutusu ve "Yorumla" butonu oluştur.
+- Yorum sonuçlarını göstermek için bir alan hazırla.
 
 ### 2. Backend (ASP.NET Core API)
 **Teknoloji:** ASP.NET Core Web API  
@@ -20,7 +20,7 @@ Bu proje, Blazor kullanarak bir kullanıcı arayüzü ve ASP.NET Core kullanarak
 
 ### 3. Veri İşleme (RAG - Retrieval-Augmented Generation)
 **Yöntem:** RAG (Retrieval-Augmented Generation)  
-**Amaç:** 100 rüya verisinin bulunduğu JSON dosyasını kullanarak, kullanıcıdan gelen rüya verileri ile eşleşmeler yapıp, GPT'ye en uygun soruları yöneltmek.  
+**Amaç:** 100 rüya verisinin bulunduğu JSON dosyasını kullanarak, kullanıcıdan gelen rüya verileri ile eşleşmeler yapıp, GPT'ye en uygun soruları yöneltmek.  ( Veri genişletilebilir de.)
 **Adımlar:**  
 - JSON verilerini okuma ve işleme.
 - Kullanıcı rüyası ile JSON'daki verileri eşleştir.
