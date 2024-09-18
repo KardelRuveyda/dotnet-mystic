@@ -1,6 +1,3 @@
-![image](https://github.com/user-attachments/assets/c3b8423a-7702-4358-8a14-55281b96778b)
-
-
 # Rüya Tabirleri Botu
 
 Bu proje, Blazor kullanarak bir kullanıcı arayüzü ve ASP.NET Core kullanarak bir backend yapısı oluşturur. OpenAI'nin Dotnet API'si ile GPT modelini kullanarak RAG (Retrieval-Augmented Generation) yöntemini uygular ve bir JSON dosyasındaki verileri kullanarak rüya tabirleri sağlar.
@@ -68,3 +65,6 @@ Bu proje, Blazor kullanarak bir kullanıcı arayüzü ve ASP.NET Core kullanarak
 - Backend, bu veriyi JSON dosyasındaki rüyalarla eşleştirir.
 - OpenAI API üzerinden GPT modeline istek yapılır ve sonuçlar geri döner.
 - Sonuçlar Blazor arayüzünde kullanıcıya gösterilir.
+
+
+![image](https://github.com/user-attachments/assets/c3b8423a-7702-4358-8a14-55281b96778b)
