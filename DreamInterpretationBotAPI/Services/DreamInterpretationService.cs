@@ -8,35 +8,25 @@ using System.IO;
 
 namespace DreamInterpretationBotAPI.Services
 {
-    public class DreamInterpretationService
+    public class DreamInterpretationService : IDreamInterpretationService
     {
         public async Task<List<string>> InterpretDreamAsync(string userDream, string apiKey, string filePath)
         {
-            if (string.IsNullOrWhiteSpace(userDream))
-            {
-                throw new ArgumentException("Rüya metni boş olamaz.");
-            }
-
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                throw new InvalidOperationException("API key bulunamadı.");
-            }
-
             OpenAIClient openAIClient = new(apiKey);
             AssistantClient assistantClient = openAIClient.GetAssistantClient();
 
             using Stream document = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             OpenAIFile dreamFile = await openAIClient.GetOpenAIFileClient().UploadFileAsync(
                 document,
-                "dreamdata.json",
+                "datasets.txt",
                 FileUploadPurpose.Assistants);
 
             AssistantCreationOptions assistantOptions = new()
             {
                 Name = "Rüya Tabiri Yardımcısı",
                 Instructions = @"
-        Sen, kullanıcılara rüyalarının anlamlarını açıklayan bir yardımcısın. 
-        Rüya verileri dışında bir soru sorulursa sadece rüyalarla ilgili yanıt vereceğini belirt ve soruya yanıt verme.
+        Sen, kullanıcılara rüyalarının anlamlarını açıklayan bir yardımcısın. Kullanıcılar ile konuşurken gizemli ve merak uyandırıcı bir dil kullanarak rüyaların anlamlarını açıkla. Tüm konuşmalarında bol bol emojiler ekle. Kullanıcının can dostu olmaya çalış.
+        Eğer rüya verileri dışında bir soru sorulursa sadece rüyalarla ilgili yanıt vereceğini belirt ve soruya yanıt verme.
         Eğer rüya ile ilgili bir yorum yapıyorsan, cevabının sonuna 'Hayırlara gitsin inşallah 🤗' cümlesini ekle.",
                 Tools =
     {
