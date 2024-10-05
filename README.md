@@ -1,70 +1,70 @@
-# Rüya Tabirleri Botu
+# Mystic 🔮
 
-Bu proje, Blazor kullanarak bir kullanıcı arayüzü ve ASP.NET Core kullanarak bir backend yapısı oluşturur. OpenAI'nin Dotnet API'si ile GPT modelini kullanarak RAG (Retrieval-Augmented Generation) yöntemini uygular ve bir JSON dosyasındaki verileri kullanarak rüya tabirleri sağlar.
+This project creates a user interface using Blazor and a backend structure using ASP.NET Core. It applies the RAG (Retrieval-Augmented Generation) method by leveraging the GPT model through OpenAI's Dotnet API and provides dream interpretations using data from a JSON file.
 
-## Proje Akışı
+## Project Flow
 
 ### 1. Frontend (Blazor)
-**Teknoloji:** Blazor WebAssembly veya Blazor Server  
-**Amaç:** Kullanıcıların rüyalarını yazabilecekleri bir arayüz ve tabir sonuçlarını görebilecekleri bir ekran oluşturmak.  
-**Adımlar:**  
-- Rüyanın yazılacağı bir metin kutusu ve "Yorumla" butonu oluştur.
-- Yorum sonuçlarını göstermek için bir alan hazırla.
+**Technology:** Blazor WebAssembly or Blazor Server  
+**Purpose:** To create an interface where users can write their dreams and see the interpretation results on the screen.  
+**Steps:**  
+- Create a text box where the dream can be written and a "Interpret" button.
+- Set up a field to display the interpretation results.
 
 ### 2. Backend (ASP.NET Core API)
-**Teknoloji:** ASP.NET Core Web API  
-**Amaç:** Kullanıcıdan gelen rüya verilerini işlemek ve OpenAI API ile GPT modeline göndererek cevap almak.  
-**Adımlar:**  
-- API uç noktaları oluştur.
-- OpenAI API'yi entegre ederek GPT modeline istek gönder ve sonuçları geri al.
+**Technology:** ASP.NET Core Web API  
+**Purpose:** To process the dream data submitted by users and send it to the GPT model via the OpenAI API to get a response.  
+**Steps:**  
+- Create API endpoints.
+- Integrate the OpenAI API to send requests to the GPT model and return the results.
 
-### 3. Veri İşleme (RAG - Retrieval-Augmented Generation)
-**Yöntem:** RAG (Retrieval-Augmented Generation)  
-**Amaç:** 100 rüya verisinin bulunduğu JSON dosyasını kullanarak, kullanıcıdan gelen rüya verileri ile eşleşmeler yapıp, GPT'ye en uygun soruları yöneltmek.  ( Veri genişletilebilir de.)
-**Adımlar:**  
-- JSON verilerini okuma ve işleme.
-- Kullanıcı rüyası ile JSON'daki verileri eşleştir.
-- Elde edilen verilerle GPT'ye gönderilecek prompt oluştur.
+### 3. Data Processing (RAG - Retrieval-Augmented Generation)
+**Method:** RAG (Retrieval-Augmented Generation)  
+**Purpose:** To use the JSON file, which contains 100 dream data entries, match it with the user's dream data, and send the most appropriate prompts to GPT. (The data can also be expanded.)  
+**Steps:**  
+- Read and process the JSON data.
+- Match the user's dream with the data in the JSON file.
+- Generate a prompt from the collected data to send to GPT.
 
-### 4. OpenAI API (GPT ile Entegrasyon)
-**Teknoloji:** OpenAI API (Dotnet OpenAI API)  
-**Amaç:** GPT modeline rüya tabirleri sormak ve sonuçları almak.  
-**Adımlar:**  
-- Kullanıcının rüyasını ve JSON dosyasından alınan verileri içeren bir prompt oluştur.
-- OpenAI API üzerinden bu prompt'u GPT'ye gönder ve cevabı al.
+### 4. OpenAI API (GPT Integration)
+**Technology:** OpenAI API (Dotnet OpenAI API)  
+**Purpose:** To ask the GPT model for dream interpretations and retrieve the results.  
+**Steps:**  
+- Create a prompt that contains the user's dream and the data from the JSON file.
+- Send this prompt to GPT via the OpenAI API and get the response.
 
-### 5. Veri Yönetimi (JSON)
-**Teknoloji:** JSON  
-**Amaç:** 100 veriden oluşan rüya tabirleri verilerini RAG yapısında GPT'ye sunmak.  
-**Adımlar:**  
-- JSON dosyasını backend'de işleyerek RAG sürecinde kullanılacak verileri hazırla.
+### 5. Data Management (JSON)
+**Technology:** JSON  
+**Purpose:** To provide the 100 dream interpretation data entries to GPT using the RAG structure.  
+**Steps:**  
+- Process the JSON file on the backend to prepare the data to be used in the RAG process.
 
-### 6. Sonuçların Görüntülenmesi
-**Teknoloji:** Blazor (Frontend)  
-**Amaç:** OpenAI API'den alınan tabir sonuçlarını kullanıcıya göstermek.  
-**Adımlar:**  
-- Backend'den gelen sonuçları Blazor arayüzünde göster.
+### 6. Displaying Results
+**Technology:** Blazor (Frontend)  
+**Purpose:** To display the interpretation results from the OpenAI API to the user.  
+**Steps:**  
+- Display the results received from the backend on the Blazor interface.
 
-### 7. Test ve Optimizasyon
-**Yöntem:** Performans ve doğruluk analizleri  
-**Amaç:** Hem frontend hem de backend'in düzgün çalıştığını kontrol etmek ve RAG yönteminin doğruluğunu artırmak.  
-**Adımlar:**  
-- Blazor ve ASP.NET Core'u entegre çalıştırarak tüm süreci test et.
-- GPT'ye gönderilen prompt'ları ve JSON verilerini optimize et.
+### 7. Testing and Optimization
+**Method:** Performance and accuracy analysis  
+**Purpose:** To ensure that both the frontend and backend are working correctly and to improve the accuracy of the RAG method.  
+**Steps:**  
+- Test the entire process by running Blazor and ASP.NET Core together.
+- Optimize the prompts sent to GPT and the JSON data.
 
-## Gereksinimler
-- .NET SDK 6.0 veya üzeri
-- Blazor WebAssembly veya Server
+## Requirements
+- .NET SDK 6.0 or higher
+- Blazor WebAssembly or Server
 - ASP.NET Core Web API
-- OpenAI API Anahtarı
-- JSON Dosyası (100 veri içeren rüya tabirleri)
+- OpenAI API Key
+- JSON File (containing 100 dream interpretation entries)
 
-## Kullanım
+## Usage
 
-- Kullanıcı, rüya tabirini Blazor arayüzü üzerinden yazar.
-- Backend, bu veriyi JSON dosyasındaki rüyalarla eşleştirir.
-- OpenAI API üzerinden GPT modeline istek yapılır ve sonuçlar geri döner.
-- Sonuçlar Blazor arayüzünde kullanıcıya gösterilir.
+- The user writes their dream interpretation request through the Blazor interface.
+- The backend matches this data with the dreams in the JSON file.
+- A request is made to the GPT model via the OpenAI API, and the results are returned.
+- The results are displayed to the user in the Blazor interface.
 
 
 ![image](https://github.com/user-attachments/assets/c3b8423a-7702-4358-8a14-55281b96778b)
