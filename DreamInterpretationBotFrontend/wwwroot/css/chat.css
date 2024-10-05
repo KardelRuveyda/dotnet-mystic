@@ -178,6 +178,10 @@
     color: #FFFFFF; /* Beyaz yazı rengi */
 }
 
+.custom-spinner {
+    color: #673AB7;
+    border-radius: 10px;
+}
 /* Fade-in animasyonu */
 @keyframes fadeIn {
     from {

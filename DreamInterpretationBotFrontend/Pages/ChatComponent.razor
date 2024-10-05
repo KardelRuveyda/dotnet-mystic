@@ -10,18 +10,21 @@
         @foreach (var message in chatMessages)
         {
             <div class="message @message.Role">
-                <div class="message-icon"></div> 
+                <div class="message-icon"></div>
                 <div class="message-content">
-                    @((MarkupString)message.Content) 
+                    @((MarkupString)message.Content)
                 </div>
             </div>
         }
         @if (isLoading)
         {
             <div class="message Bot">
-                <div class="message-icon"></div> 
+                <div class="message-icon"></div>
                 <div class="message-content">
-                    ...
+                    <div class="spinner-grow custom-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+
                 </div>
             </div>
         }
@@ -36,7 +39,7 @@
 @code {
     private string userMessage = string.Empty;
     private List<ChatMessage> chatMessages = new();
-    private bool isLoading = false; 
+    private bool isLoading = false;
 
     private ElementReference messagesContainer;
 
@@ -44,7 +47,7 @@
     {
         // Karşılama mesajını ekle
         await AddBotMessage("Merhaba! Rüyalarınızla ilgili bir yardım istiyorsanız, lütfen bana gördüğünüz rüyayı anlatın. Size anlamını açıklamaya çalışayım.");
-        await ScrollToBottom(); 
+        await ScrollToBottom();
     }
 
     private async Task AddBotMessage(string message)
