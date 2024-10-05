@@ -18,7 +18,7 @@ namespace DreamInterpretationBotAPI.Services
             using Stream document = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             OpenAIFile dreamFile = await openAIClient.GetOpenAIFileClient().UploadFileAsync(
                 document,
-                "datasets.txt",
+                "dreamdata.json",
                 FileUploadPurpose.Assistants);
 
             AssistantCreationOptions assistantOptions = new()
