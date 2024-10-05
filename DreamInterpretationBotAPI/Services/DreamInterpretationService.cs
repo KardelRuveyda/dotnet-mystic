@@ -22,18 +22,15 @@ namespace DreamInterpretationBotAPI.Services
                 throw new InvalidOperationException("API key bulunamadı.");
             }
 
-            // OpenAI istemcilerini başlat
             OpenAIClient openAIClient = new(apiKey);
             AssistantClient assistantClient = openAIClient.GetAssistantClient();
 
-            // Dosyayı yükle
             using Stream document = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             OpenAIFile dreamFile = await openAIClient.GetOpenAIFileClient().UploadFileAsync(
                 document,
                 "dreamdata.json",
                 FileUploadPurpose.Assistants);
 
-            // Yardımcı oluşturma seçenekleri
             AssistantCreationOptions assistantOptions = new()
             {
                 Name = "Rüya Tabiri Yardımcısı",
@@ -58,10 +55,8 @@ namespace DreamInterpretationBotAPI.Services
             };
 
 
-            // Asistanı oluştur
             Assistant assistant = assistantClient.CreateAssistant("gpt-4o", assistantOptions);
 
-            // Kullanıcı sorusunu assistant ile işleme alalım
             ThreadCreationOptions threadOptions = new()
             {
                 InitialMessages = { userDream }
@@ -69,17 +64,14 @@ namespace DreamInterpretationBotAPI.Services
 
             ThreadRun threadRun = assistantClient.CreateThreadAndRun(assistant.Id, threadOptions);
 
-            // Yardımcı tamamlanana kadar bekle
             while (!threadRun.Status.IsTerminal)
             {
                 await Task.Delay(TimeSpan.FromSeconds(1));
                 threadRun = await assistantClient.GetRunAsync(threadRun.ThreadId, threadRun.Id);
             }
 
-            // Mesajları al
             CollectionResult<ThreadMessage> messages = assistantClient.GetMessages(threadRun.ThreadId, new MessageCollectionOptions() { Order = MessageCollectionOrder.Ascending });
 
-            // Yanıtları HTML formatında döndür (her cümleyi <p> içinde gönderelim)
             var formattedMessages = messages
                .SelectMany(message => message.Content.Select(content =>
                    $"<p>{content.Text.Replace("\n", "</p><p>")}"))
