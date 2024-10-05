@@ -3,17 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamInterpretationBotFrontend", "DreamInterpretationBotFrontend\DreamInterpretationBotFrontend.csproj", "{EE36BA15-E783-43DE-BB6D-E2A4F81EFF6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamInterpretationBotFrontend", "DreamInterpretationBotFrontend\DreamInterpretationBotFrontend.csproj", "{EE36BA15-E783-43DE-BB6D-E2A4F81EFF6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamInterpretationBotAPI", "DreamInterpretationBotAPI\DreamInterpretationBotAPI.csproj", "{A9392AF5-4CDA-44EA-8B1E-B5092E06F23F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamInterpretationBotAPI", "DreamInterpretationBotAPI\DreamInterpretationBotAPI.csproj", "{A9392AF5-4CDA-44EA-8B1E-B5092E06F23F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EE36BA15-E783-43DE-BB6D-E2A4F81EFF6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +21,11 @@ Global
 		{A9392AF5-4CDA-44EA-8B1E-B5092E06F23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9392AF5-4CDA-44EA-8B1E-B5092E06F23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9392AF5-4CDA-44EA-8B1E-B5092E06F23F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE38374A-6764-43BE-8325-7A5B018A1495}
 	EndGlobalSection
 EndGlobal

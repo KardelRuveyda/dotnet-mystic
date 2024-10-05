@@ -1,0 +1,192 @@
+﻿/* Genel chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    border: 2px solid #666;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2c3e50, #000428);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+}
+
+/* Başlık */
+.chat-header {
+    background: radial-gradient(circle, #673AB7, #512DA8);
+    color: #ffedbc;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Mesajlar bölümü */
+.chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid #673AB7;
+    scroll-behavior: smooth; /* Kaydırma davranışını yumuşatır */
+}
+
+    /* Özel scroll bar stili */
+    .chat-messages::-webkit-scrollbar,
+    .input-box::-webkit-scrollbar { /* Aynı stil input-box için de uygulanır */
+        width: 8px;
+        background-color: rgba(0, 0, 0, 0.3); /* Kaydırma alanının arka planı */
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb,
+    .input-box::-webkit-scrollbar-thumb { /* Aynı stil input-box için de uygulanır */
+        background: #673AB7; /* Kaydırma çubuğu rengi */
+        border-radius: 10px; /* Yuvarlak kenarlar */
+        border: 2px solid transparent;
+        background-clip: padding-box; /* Şeffaf kenarlık ekler */
+    }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover,
+        .input-box::-webkit-scrollbar-thumb:hover { /* Hover ile renk değişimi */
+            background-color: #512DA8;
+        }
+
+/* Mesaj kutuları */
+.message {
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 12px;
+    width: fit-content;
+    max-width: 80%;
+    font-family: 'Raleway', sans-serif;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+    .message.User {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #E0E0E0;
+        margin-left: auto;
+        border: 1px solid #e0e0e0;
+    }
+
+    .message.Bot {
+        background-color: rgba(0, 0, 0, 0.8); /* Koyu arka plan */
+        border: 1px solid #673AB7;
+        color: #fff;
+    }
+
+/* Giriş alanı */
+.chat-input {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: linear-gradient(145deg, #512DA8, #673AB7);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid #673AB7;
+}
+
+.input-box {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #333;
+    color: #ffedbc;
+    margin-right: 10px;
+    resize: none;
+    max-height: 150px; /* Maksimum yükseklik */
+    overflow-y: auto; /* Dikey kaydırma */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    font-family: 'Raleway', sans-serif;
+}
+
+    .input-box::placeholder {
+        color: #bbb;
+    }
+
+/* Gönder butonu */
+.send-button {
+    background-color: #673AB7;
+    color: #ffedbc;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-family: 'Raleway', sans-serif;
+}
+
+    .send-button:hover {
+        background-color: #512DA8;
+    }
+
+/* Konuşma balonları için genel ayarlar */
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 15px;
+    width: fit-content;
+    max-width: 80%;
+    font-family: 'Raleway', sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+    .message:hover {
+        transform: scale(1.05); /* Mesajın üzerine gelince hafif büyüme efekti */
+    }
+
+.message-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0; /* İkonun küçülmesini engeller */
+    background-size: cover;
+}
+
+.message.User .message-icon {
+    background-image: url('/images/user-icon.png'); /* Kullanıcı ikonu */
+}
+
+.message.Bot .message-icon {
+    background-image: url('/images/bot-icon.png'); /* Bot ikonu */
+}
+
+/* Mesaj içeriği */
+.message-content {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    flex-grow: 1;
+    background: linear-gradient(135deg, #4A90E2, #9013FE); /* Kullanıcı için degrade */
+}
+
+.message.Bot .message-content {
+    background: linear-gradient(157deg, #000, #212529); /* Bot için degrade renkler */
+    color: #FFFFFF; /* Beyaz yazı rengi */
+}
+
+/* Fade-in animasyonu */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
