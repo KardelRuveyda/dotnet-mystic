@@ -1,70 +1,90 @@
-# Mystic 🔮
+# Dotnet Mystic 🔮
 
-This project creates a user interface using Blazor and a backend structure using ASP.NET Core. It applies the RAG (Retrieval-Augmented Generation) method by leveraging the GPT model through OpenAI's Dotnet API and provides dream interpretations using data from a JSON file.
+![ezgif-2-d3fe249d20](https://github.com/user-attachments/assets/c825f734-5519-4f3c-9221-df7d98cad262)
 
-## Project Flow
+Bu proje, OpenAI'nin GPT modelini kullanarak rüyalarınızı yorumlayan bir bot oluşturmayı amaçlar. Blazor tabanlı bir ön yüz ve ASP.NET Core Web API tabanlı bir arka yüz içerir. RAG (Retrieval-Augmented Generation) yöntemini kullanarak JSON dosyasındaki rüya verileriyle kullanıcının rüyasını eşleştirir ve sonuçları GPT üzerinden sağlar.
 
-### 1. Frontend (Blazor)
-**Technology:** Blazor WebAssembly or Blazor Server  
-**Purpose:** To create an interface where users can write their dreams and see the interpretation results on the screen.  
-**Steps:**  
-- Create a text box where the dream can be written and a "Interpret" button.
-- Set up a field to display the interpretation results.
+## Proje Akışı
 
-### 2. Backend (ASP.NET Core API)
-**Technology:** ASP.NET Core Web API  
-**Purpose:** To process the dream data submitted by users and send it to the GPT model via the OpenAI API to get a response.  
-**Steps:**  
-- Create API endpoints.
-- Integrate the OpenAI API to send requests to the GPT model and return the results.
+### 1. Ön Yüz (Blazor)
+- **Teknoloji:** Blazor WebAssembly veya Blazor Server  
+- **Amaç:** Kullanıcıların rüyalarını yazabileceği ve sonuçları görebileceği bir kullanıcı arayüzü.
+- **Özellikler:** 
+  - Rüya metni girişi için bir metin kutusu
+  - Yorum sonuçlarının görüntülenmesi
+  - Kullanıcıya, bot tarafından rüyalarıyla ilgili açıklamalar yapabilen bir mesajlaşma arayüzü
 
-### 3. Data Processing (RAG - Retrieval-Augmented Generation)
-**Method:** RAG (Retrieval-Augmented Generation)  
-**Purpose:** To use the JSON file, which contains 100 dream data entries, match it with the user's dream data, and send the most appropriate prompts to GPT. (The data can also be expanded.)  
-**Steps:**  
-- Read and process the JSON data.
-- Match the user's dream with the data in the JSON file.
-- Generate a prompt from the collected data to send to GPT.
+### 2. Arka Yüz (ASP.NET Core API)
+- **Teknoloji:** ASP.NET Core Web API  
+- **Amaç:** Kullanıcıdan alınan rüya verisini GPT modeline göndermek ve sonuçları döndürmek.
+- **Özellikler:** 
+  - OpenAI API ile entegrasyon
+  - Kullanıcı rüya verisinin işlenmesi ve API üzerinden yorumlanması
 
-### 4. OpenAI API (GPT Integration)
-**Technology:** OpenAI API (Dotnet OpenAI API)  
-**Purpose:** To ask the GPT model for dream interpretations and retrieve the results.  
-**Steps:**  
-- Create a prompt that contains the user's dream and the data from the JSON file.
-- Send this prompt to GPT via the OpenAI API and get the response.
+### 3. RAG Yöntemi (Veri İşleme)
+- **Yöntem:** Retrieval-Augmented Generation (RAG)  
+- **Amaç:** JSON dosyasında bulunan rüya verilerini kullanarak, kullanıcının girdiği rüya ile en uygun veriyi eşleştirip GPT'ye göndermek.
+- **Veri Yönetimi:** 100 rüya yorumu içeren bir JSON dosyası işlenir ve GPT'ye en uygun istemler gönderilir.
 
-### 5. Data Management (JSON)
-**Technology:** JSON  
-**Purpose:** To provide the 100 dream interpretation data entries to GPT using the RAG structure.  
-**Steps:**  
-- Process the JSON file on the backend to prepare the data to be used in the RAG process.
+### 4. OpenAI GPT Entegrasyonu
+- **Teknoloji:** OpenAI API (Dotnet)  
+- **Amaç:** GPT modelinden rüya yorumlarını almak ve kullanıcıya sunmak.
+- **Özellikler:** 
+  - Kullanıcı tarafından yazılan rüya ve JSON verilerinin birleştirilmesi
+  - OpenAI API'ye isteğin gönderilmesi ve yanıtın alınması
 
-### 6. Displaying Results
-**Technology:** Blazor (Frontend)  
-**Purpose:** To display the interpretation results from the OpenAI API to the user.  
-**Steps:**  
-- Display the results received from the backend on the Blazor interface.
+### 5. JSON Verileri
+- **Teknoloji:** JSON  
+- **Amaç:** Rüya yorum verilerini tutmak ve kullanıcının rüyasıyla eşleşen verileri kullanarak yorum yapmak.
+- **Veri Yapısı:** 100 farklı rüya yorumu içeren bir JSON dosyası kullanılır.
 
-### 7. Testing and Optimization
-**Method:** Performance and accuracy analysis  
-**Purpose:** To ensure that both the frontend and backend are working correctly and to improve the accuracy of the RAG method.  
-**Steps:**  
-- Test the entire process by running Blazor and ASP.NET Core together.
-- Optimize the prompts sent to GPT and the JSON data.
+### 6. Sonuçların Gösterimi
+- **Teknoloji:** Blazor  
+- **Amaç:** OpenAI API'den dönen rüya yorumlarını kullanıcıya göstermek.
+- **Özellikler:** Yorum sonuçlarının mesajlaşma arayüzü üzerinde gösterimi.
 
-## Requirements
-- .NET SDK 6.0 or higher
-- Blazor WebAssembly or Server
-- ASP.NET Core Web API
-- OpenAI API Key
-- JSON File (containing 100 dream interpretation entries)
+## Kurulum
 
-## Usage
+1. **Gereksinimler:**
+   - .NET SDK 6.0 veya üstü
+   - OpenAI API Anahtarı
+   - 100 rüya yorumu içeren JSON dosyası
 
-- The user writes their dream interpretation request through the Blazor interface.
-- The backend matches this data with the dreams in the JSON file.
-- A request is made to the GPT model via the OpenAI API, and the results are returned.
-- The results are displayed to the user in the Blazor interface.
+2. **Adımlar:**
+   - Proje dosyalarını yerel bilgisayarınıza klonlayın.
+   - `appsettings.json` dosyasına OpenAI API anahtarınızı ekleyin.
+   - Backend ve frontend projelerini çalıştırmak için .NET komutlarını kullanın:
+     ```bash
+     dotnet build
+     dotnet run
+     ```
 
+## Kullanım
 
-![image](https://github.com/user-attachments/assets/c3b8423a-7702-4358-8a14-55281b96778b)
+1. **Rüya Yazma:**
+   - Blazor arayüzünde rüyanızı metin kutusuna yazın.
+   - "Yorumla" butonuna tıklayarak rüyanızın GPT modeli tarafından yorumlanmasını bekleyin.
+
+2. **RAG Yöntemi ile Eşleşme:**
+   - Backend, yazdığınız rüyayı JSON dosyasındaki 100 rüya verisi ile eşleştirir ve en uygun istemi GPT'ye gönderir.
+
+3. **Sonuçlar:**
+   - GPT modelinden gelen rüya yorumu ekranda gösterilir.
+   - Rüyanızla ilgili anlamlı ve detaylı bir yorum görürsünüz.
+
+## Geliştirme ve Katkı
+
+Proje ile ilgili geri bildirim ve katkılarınızı bekleriz. Aşağıdaki adımları izleyerek projeye katkıda bulunabilirsiniz:
+
+1. Projeyi forklayın
+2. Yeni bir dal oluşturun: `git checkout -b yeni-ozellik`
+3. Yaptığınız değişiklikleri commit'leyin: `git commit -m 'Yeni özellik eklendi'`
+4. Dalları birleştirin: `git push origin yeni-ozellik`
+5. Bir pull request oluşturun
+
+## Lisans
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+---
+
+**Hayırlara vesile olur inşallah!** 🤗
