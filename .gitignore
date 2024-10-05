@@ -396,3 +396,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+DreamInterpretationBotAPI/Dataset/
+DreamInterpretationBotAPI/appsettings.json
+DreamInterpretationBotAPI/appsettings.Development.json
+
+*.Dataset
+*.appsettings.json
+*.appsettings.Development.json

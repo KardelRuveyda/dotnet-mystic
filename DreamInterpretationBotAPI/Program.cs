@@ -1,13 +1,36 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// appsettings.json'ý yükleme
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddUserSecrets<Program>(optional: true, reloadOnChange: true);
+
+// CORS ekleme
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorFrontend", policyBuilder =>
+    {
+        policyBuilder.WithOrigins("https://localhost:7128") // Blazor projenizin URL'si
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials();
+    });
+});
+
+// Controller'larý ekleyin
+builder.Services.AddControllers();
+
+// Swagger ekleme
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// CORS politikasýný kullan
+app.UseCors("AllowBlazorFrontend");
+
+// Swagger konfigürasyonu
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -16,29 +39,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+// Eðer yetkilendirme kullanmýyorsanýz bu satýrý kaldýrýn
+// app.UseAuthorization();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapControllers(); // Controller'larýn çalýþabilmesi için gerekli
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
