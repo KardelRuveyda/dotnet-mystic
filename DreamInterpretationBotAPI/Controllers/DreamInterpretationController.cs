@@ -29,21 +29,10 @@ namespace DreamInterpretationBotAPI.Controllers
             {
                 return BadRequest("Lütfen bir rüya girin.");
             }
+            
+            var interpretation = await _dreamInterpretationService.InterpretDreamAsync(dreamRequest.Dream, _apiKey, _filePath);
 
-            try
-            {
-                // Rüya yorumunu al
-                var interpretation = await _dreamInterpretationService.InterpretDreamAsync(dreamRequest.Dream, _apiKey, _filePath);
-                
-
-                
-                return Ok(interpretation);
-            }
-            catch (Exception ex)
-            {
-                // Hata durumunda geri dön
-                return StatusCode(500, $"Bir hata oluştu: {ex.Message}");
-            }
+            return Ok(interpretation);
         }
     }
 
