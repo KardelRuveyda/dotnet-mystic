@@ -58,14 +58,18 @@
 
     private async Task SendMessage()
     {
-        if (!string.IsNullOrWhiteSpace(userMessage))
+        // Kullanıcı mesajını hemen temizle
+        var tempMessage = userMessage;
+        userMessage = string.Empty;
+
+        if (!string.IsNullOrWhiteSpace(tempMessage))
         {
             // Kullanıcı mesajını ekle
-            chatMessages.Add(new ChatMessage { Role = "User", Content = userMessage });
+            chatMessages.Add(new ChatMessage { Role = "User", Content = tempMessage });
             isLoading = true; // Yüklenme durumu başlar
             await ScrollToBottom();
 
-            var response = await Http.PostAsJsonAsync("https://localhost:7130/api/dreaminterpretation/interpret", new { Dream = userMessage });
+            var response = await Http.PostAsJsonAsync("https://localhost:7130/api/dreaminterpretation/interpret", new { Dream = tempMessage });
 
             if (response.IsSuccessStatusCode)
             {
@@ -78,10 +82,9 @@
                 }
                 await ScrollToBottom();
             }
-
-            userMessage = string.Empty;
         }
     }
+
 
     private async Task ScrollToBottom()
     {
