@@ -1,6 +1,6 @@
 # Dotnet Mystic 🔮
 
-![Uploading ezgif-1-a61c8051cb.gif…]()
+![ezgif-1-a61c8051cb](https://github.com/user-attachments/assets/392aa3e8-229a-4c2f-8f5d-97b234628ee0)
 
 
 Bu proje, OpenAI'nin GPT modelini kullanarak rüyalarınızı yorumlayan bir bot oluşturmayı amaçlar. Blazor tabanlı bir ön yüz ve ASP.NET Core Web API tabanlı bir arka yüz içerir. RAG (Retrieval-Augmented Generation) yöntemini kullanarak JSON dosyasındaki rüya verileriyle kullanıcının rüyasını eşleştirir ve sonuçları GPT üzerinden sağlar.
