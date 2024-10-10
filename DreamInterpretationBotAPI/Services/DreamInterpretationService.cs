@@ -11,7 +11,7 @@ namespace DreamInterpretationBotAPI.Services
     public class DreamInterpretationService : IDreamInterpretationService
     {
         public async Task<List<string>> InterpretDreamAsync(string userDream, string apiKey, string filePath)
-        {
+        { 
             OpenAIClient openAIClient = new(apiKey);
             AssistantClient assistantClient = openAIClient.GetAssistantClient();
 
@@ -66,9 +66,6 @@ namespace DreamInterpretationBotAPI.Services
                .SelectMany(message => message.Content.Select(content =>
                    $"<p>{content.Text.Replace("\n", "</p><p>")}"))
                .ToList();
-
-
-
             return formattedMessages;
         }
     }

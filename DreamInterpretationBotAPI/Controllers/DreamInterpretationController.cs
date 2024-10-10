@@ -24,7 +24,6 @@ namespace DreamInterpretationBotAPI.Controllers
         public async Task<IActionResult> InterpretDream([FromBody] DreamRequest dreamRequest)
         {
             var interpretation = await _dreamInterpretationService.InterpretDreamAsync(dreamRequest.Dream, _openAIConstants.ApiKey, _openAIConstants.FilePath);
-
             return Ok(interpretation);
         }
     }
