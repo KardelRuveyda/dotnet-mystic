@@ -404,3 +404,4 @@ DreamInterpretationBotAPI/appsettings.Development.json
 *.Dataset
 *.appsettings.json
 *.appsettings.Development.json
+/DreamInterpretationBotAPI/secrets.json
