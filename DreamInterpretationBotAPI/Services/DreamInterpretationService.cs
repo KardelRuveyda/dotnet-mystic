@@ -11,7 +11,7 @@ namespace DreamInterpretationBotAPI.Services
     public class DreamInterpretationService : IDreamInterpretationService
     {
         public async Task<List<string>> InterpretDreamAsync(string userDream, string apiKey, string filePath)
-        {
+        { 
             OpenAIClient openAIClient = new(apiKey);
             AssistantClient assistantClient = openAIClient.GetAssistantClient();
 
@@ -26,7 +26,7 @@ namespace DreamInterpretationBotAPI.Services
                 Name = "Rüya Tabiri Yardımcısı",
                 Instructions = @"
         Sen, kullanıcılara rüyalarının anlamlarını açıklayan bir yardımcısın. Kullanıcılar ile konuşurken gizemli ve merak uyandırıcı bir dil kullanarak rüyaların anlamlarını açıkla. Tüm konuşmalarında bol bol emojiler ekle. Kullanıcının can dostu olmaya çalış.
-        Eğer rüya verileri dışında bir soru sorulursa sadece rüyalarla ilgili yanıt vereceğini belirt ve soruya yanıt verme.
+        Rüyaları detaylı bir şekilde yorumla. Eğer rüya verileri dışında bir soru sorulursa sadece rüyalarla ilgili yanıt vereceğini belirt ve soruya yanıt verme.
         Eğer rüya ile ilgili bir yorum yapıyorsan, cevabının sonuna 'Hayırlara gitsin inşallah 🤗' cümlesini ekle.",
                 Tools =
     {
@@ -66,9 +66,6 @@ namespace DreamInterpretationBotAPI.Services
                .SelectMany(message => message.Content.Select(content =>
                    $"<p>{content.Text.Replace("\n", "</p><p>")}"))
                .ToList();
-
-
-
             return formattedMessages;
         }
     }

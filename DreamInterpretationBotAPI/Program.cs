@@ -6,12 +6,11 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// appsettings.json'ý yükleme
+// appsettings.json ve secrets.json dosyalarÄ±nÄ± yÃ¼kleme
 builder.Configuration
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-    .AddUserSecrets<Program>(optional: true, reloadOnChange: true);
-
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) // appsettings.json'Ä± yÃ¼kler
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true) // Ortam spesifik ayarlarÄ± yÃ¼kler
+    .AddUserSecrets<Program>(optional: true, reloadOnChange: true); // GeliÅŸtirme ortamÄ±nda secrets.json'Ä± yÃ¼kler
 
 // CORS ekleme
 builder.Services.AddCors(options =>
@@ -24,21 +23,27 @@ builder.Services.AddCors(options =>
                .AllowCredentials();
     });
 });
-#region Configuration
-// Configuration
 
+#region Configuration   
+
+// OpenAIConstants ayarlarÄ±nÄ± configure etme
 builder.Services.AddOptions<OpenAIConstants>()
-    .Bind(builder.Configuration.GetSection(OpenAIConstants.Key))
-    .ValidateDataAnnotations()
-    .Validate(settings => !string.IsNullOrEmpty(settings.ApiKey) && !string.IsNullOrEmpty(settings.FilePath),
-              "Configuration settings are missing or incomplete. Please check appsettings.json.");
-
-
+    .Bind(builder.Configuration.GetSection("OpenAIConstants")) // OpenAIConstants sekmesinden baÄŸlama
+    .ValidateDataAnnotations() // Veri doÄŸrulamasÄ± yapma
+    .Validate(settings => !string.IsNullOrEmpty(settings.ApiKey) && !string.IsNullOrEmpty(settings.FilePath), 
+              "Configuration settings are missing or incomplete. Please check appsettings.json or secrets.json.")
+    .Configure(options => 
+    {
+        // Loglama veya debug iÅŸlemleri yapÄ±labilir
+        Console.WriteLine($"ApiKey: {options.ApiKey}, FilePath: {options.FilePath}");
+    });
 
 #endregion
 
-builder.Services.AddScoped<IDreamInterpretationService, DreamInterpretationService>();
-// Controller'larý ekleyin
+// Hizmetlerin eklenmesi
+builder.Services.AddScoped<IDreamInterpretationService, DreamInterpretationService>(); // Servis ekleme
+
+// Controller'larÄ± ekleyin
 builder.Services.AddControllers();
 
 // Swagger ekleme
@@ -47,10 +52,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// CORS politikasýný kullan
+// CORS politikasÄ±nÄ± kullan
 app.UseCors("AllowBlazorFrontend");
 
-// Swagger konfigürasyonu
+// Swagger konfigÃ¼rasyonu
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -59,9 +64,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Eðer yetkilendirme kullanmýyorsanýz bu satýrý kaldýrýn
+// Authorization kullanmÄ±yorsanÄ±z bu satÄ±rÄ± kaldÄ±rabilirsiniz
 // app.UseAuthorization();
 
-app.MapControllers(); // Controller'larýn çalýþabilmesi için gerekli
+app.MapControllers(); // Controller'larÄ±n Ã§alÄ±ÅŸabilmesi iÃ§in gerekli
 
 app.Run();
